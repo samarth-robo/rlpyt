@@ -112,7 +112,7 @@ class SAC(RlAlgorithm):
         self.q2_optimizer = self.OptimCls(self.agent.q2_parameters(),
             lr=self.learning_rate, **self.optim_kwargs)
         if self.fixed_alpha is None:
-            self._log_alpha = self.init_log_alpha * torch.ones(1, requires_grad=True)
+            self._log_alpha = torch.tensor((self.init_log_alpha, ), requires_grad=True)
             self._alpha = torch.exp(self._log_alpha.detach())
             self.alpha_optimizer = self.OptimCls((self._log_alpha,),
                 lr=self.learning_rate, **self.optim_kwargs)
